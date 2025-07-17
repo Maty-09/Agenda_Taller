@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Agendar Mantención</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+  <div class="max-w-xl mx-auto mt-10 bg-white p-8 rounded-xl shadow-md">
+    <h1 class="text-2xl font-bold text-center mb-6">Agendar Mantención</h1>
+
+    {% if error %}
+      <div class="bg-red-100 text-red-700 px-4 py-2 mb-4 rounded">{{ error }}</div>
+    {% endif %}
+
+    {% if success %}
+      <div class="bg-green-100 text-green-700 px-4 py-2 mb-4 rounded">{{ success }}</div>
+    {% endif %}
+
+    {% if tipo_servicio %}
+      <input type="hidden" name="tipo_servicio" value="{{ tipo_servicio }}">
+      <p class="text-gray-700"><strong>Servicio:</strong>
+        {{ "Equipo Especializado" if tipo_servicio == "especializado" else "Domicilio / Taller" }}
+      </p>
+    {% else %}
+      <!-- mostrar el campo para elegir -->
+      <label class="block font-medium">Tipo de servicio:</label>
+      <select name="tipo_servicio" required class="w-full border px-3 py-2 rounded">
+        <option value="especializado">Equipo Especializado</option>
+        <option value="domicilio_taller">Domicilio / Taller</option>
+      </select>
+    {% endif %}
+    
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+
+    {% if success %}
+        <p style="color: green;">{{ success }}</p>
+    {% endif %}
+
+
+
+    <form method="post" action="/agendar_web">
+        <input name="tipo_servicio" placeholder="Tipo Servicio" value="{{ datos.tipo_servicio if datos else '' }}" required><br>
+        <input name="nombre" placeholder="Nombre" value="{{ datos.nombre if datos else '' }}" required><br>
+        <input name="apellido" placeholder="Apellido" value="{{ datos.apellido if datos else '' }}" required><br>
+        <input type="email" name="correo" placeholder="Correo" value="{{ datos.correo if datos else '' }}" required><br>
+        <input name="telefono" placeholder="Teléfono" value="{{ datos.telefono if datos else '' }}" required><br>
+        <input name="patente" placeholder="Patente" value="{{ datos.patente if datos else '' }}" required><br>
+        <input type="datetime-local" name="fecha_inicio" placeholder="Fecha Inicio" value="{{ datos.fecha_inicio.isoformat() if datos else '' }}" required><br>
+        <input type="datetime-local" name="fecha_termino" placeholder="Fecha Término" value="{{ datos.fecha_termino.isoformat() if datos else '' }}" required><br>
+        <button type="submit">Agendar</button>
+    </form>
+    
+    <form action="/cliente/agendar_web" method="post" class="space-y-4">
+      <div>
+        <label class="block font-medium">Tipo de servicio:</label>
+        <select name="tipo_servicio" required class="w-full border px-3 py-2 rounded">
+          <option value="especializado" {% if tipo_servicio == "especializado" %}selected{% endif %}>Equipo Especializado</option>
+          <option value="domicilio_taller" {% if tipo_servicio == "domicilio_taller" %}selected{% endif %}>Domicilio / Taller</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="block font-medium">Nombre:</label>
+        <input type="text" name="nombre" required class="w-full border px-3 py-2 rounded">
+      </div>
+
+      <div>
+        <label class="block font-medium">Apellido:</label>
+        <input type="text" name="apellido" required class="w-full border px-3 py-2 rounded">
+      </div>
+
+      <div>
+        <label class="block font-medium">Correo electrónico:</label>
+        <input type="email" name="correo" required class="w-full border px-3 py-2 rounded">
+      </div>
+
+      <div>
+        <label class="block font-medium">Teléfono:</label>
+        <input type="text" name="telefono" required class="w-full border px-3 py-2 rounded">
+      </div>
+
+      <div>
+        <label class="block font-medium">Patente:</label>
+        <input type="text" name="patente" required class="w-full border px-3 py-2 rounded">
+      </div>
+
+      <div>
+        <label class="block font-medium">Fecha y hora inicio:</label>
+        <input type="datetime-local" name="fecha_inicio" required class="w-full border px-3 py-2 rounded">
+      </div>
+
+      <div>
+        <label class="block font-medium">Fecha y hora término:</label>
+        <input type="datetime-local" name="fecha_termino" required class="w-full border px-3 py-2 rounded">
+      </div>
+
+      <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
+        Agendar
+      </button>
+    </form>
+  </div>
+</body>
+</html>

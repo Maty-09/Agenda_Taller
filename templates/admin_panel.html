@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head><title>Panel Administrador</title></head>
+<body>
+<h1>Panel de Administración</h1>
+
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Correo</th>
+        <th>Patente</th>
+        <th>Tipo Servicio</th>
+        <th>Fecha Inicio</th>
+        <th>Fecha Término</th>
+    </tr>
+    {% for a in mantenciones %}
+    <tr>
+        <td>{{ a.id }}</td>
+        <td>{{ a.nombre }} {{ a.apellido }}</td>
+        <td>{{ a.correo }}</td>
+        <td>{{ a.patente }}</td>
+        <td>{{ a.tipo_servicio }}</td>
+        <td>{{ a.fecha_inicio }}</td>
+        <td>{{ a.fecha_termino }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>
