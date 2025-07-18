@@ -41,17 +41,6 @@
 
 
 
-    <form method="post" action="/agendar_web">
-        <input name="tipo_servicio" placeholder="Tipo Servicio" value="{{ datos.tipo_servicio if datos else '' }}" required><br>
-        <input name="nombre" placeholder="Nombre" value="{{ datos.nombre if datos else '' }}" required><br>
-        <input name="apellido" placeholder="Apellido" value="{{ datos.apellido if datos else '' }}" required><br>
-        <input type="email" name="correo" placeholder="Correo" value="{{ datos.correo if datos else '' }}" required><br>
-        <input name="telefono" placeholder="Teléfono" value="{{ datos.telefono if datos else '' }}" required><br>
-        <input name="patente" placeholder="Patente" value="{{ datos.patente if datos else '' }}" required><br>
-        <input type="datetime-local" name="fecha_inicio" placeholder="Fecha Inicio" value="{{ datos.fecha_inicio.isoformat() if datos else '' }}" required><br>
-        <input type="datetime-local" name="fecha_termino" placeholder="Fecha Término" value="{{ datos.fecha_termino.isoformat() if datos else '' }}" required><br>
-        <button type="submit">Agendar</button>
-    </form>
     
     <form action="/cliente/agendar_web" method="post" class="space-y-4">
       <div>
